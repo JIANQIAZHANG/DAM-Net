@@ -18,20 +18,11 @@ def str2bool(v):                    # 更容易的处理布尔选项，增加对
 
 def get_parser():
     parser = argparse.ArgumentParser(description='Weak-to-Strong Consistency in RES')
-    # parser.add_argument('--config', type=str, required=True)
-    # parser.add_argument('--labeled-id-path', type=str, required=True)
-    # parser.add_argument('--unlabeled-id-path', type=str, required=True)
-    # # parser.add_argument('--save-path', type=str, required=True)
-    #parser.add_argument('--local_rank', default=0, type=int)
-    # parser.add_argument('--port', default=None, type=int)
 
-    #parser.add_argument('--save_path', default='/media/exp/fcl/000000semi_RES_1001/UniMatch-main/exp/refcoco/10%/sup_exp1_1009/', type=str)
-    parser.add_argument('--save_path', default="/public2/group_semi/UniMatch-main/exp/refcoco/10%/sup_exp1_1009/", type=str)
+    parser.add_argument('--save_path', default="/exp/", type=str)
 
     parser.add_argument('--model', default='lavt_one', help='model: lavt, lavt_one')
-    parser.add_argument('--pretrained_swin_weights', default='/public2/home/lak/semi/datasets/pretrained_weights/pretrained_weights/swin_tiny_patch4_window7_224_22k.pth', help='path to pre-trained Swin backbone weights')
-    #parser.add_argument('--pretrained_swin_weights', default='/media/exp/fcl/datasets/LAVT/pretrained_weights/swin_tiny_patch4_window7_224_22k.pth', help='path to pre-trained Swin backbone weights')
-    #parser.add_argument('--pretrained_swin_weights', default='/public2/group_semi/simi_res/weights/pretrained_weights/swin_tiny_patch4_window7_224_22k.pth', help='path to pre-trained Swin backbone weights')
+    parser.add_argument('--pretrained_swin_weights', default='path/datasets/pretrained_weights/swin_tiny_patch4_window7_224_22k.pth', help='path to pre-trained Swin backbone weights')
     parser.add_argument('--seed', default=22, type=int)
     # lavt  fcl add
     parser.add_argument('--swin_type', default='tiny', help='tiny, small, base, or large variants of the Swin Transformer')
@@ -43,15 +34,9 @@ def get_parser():
                                                   'where a, b, c, and d refer to the numbers of heads in stage-1,'
                                                   'stage-2, stage-3, and stage-4 PWAMs')
     parser.add_argument('--fusion_drop', default=0.0, type=float, help='dropout rate for PWAMs')
-    #parser.add_argument('--bert_tokenizer', default='/media/exp/fcl/datasets/LAVT/pretrained_weights/bert-base-uncased', help='BERT tokenizer')
-    parser.add_argument('--bert_tokenizer', default='/public2/home/lak/semi/datasets/bert-base-uncased', help='BERT tokenizer')
-    #parser.add_argument('--bert_tokenizer', default='/public2/group_semi/simi_res/weights/pretrained_weights/bert-base-uncased', help='BERT tokenizer')
-    # parser.add_argument('--ck_bert', default='/media/exp/fcl/datasets/LAVT/pretrained_weights/bert-base-uncased', help='pre-trained BERT weights')
-    parser.add_argument('--ck_bert', default='/public2/home/lak/semi/datasets/bert-base-uncased', help='pre-trained BERT weights')
-    #parser.add_argument('--ck_bert', default='/public2/group_semi/simi_res/weights/pretrained_weights/bert-base-uncased', help='pre-trained BERT weights')
-    #parser.add_argument('--refer_data_root', default='/media/exp/fcl/datasets/simi_res/', help='REFER dataset root directory')
-    parser.add_argument('--refer_data_root', default='/public2/home/lak/semi/datasets', help='REFER dataset root directory')
-    #parser.add_argument('--refer_data_root', default='/public2/group_semi/simi_res/', help='REFER dataset root directory')
+    parser.add_argument('--bert_tokenizer', default='/path/datasets/bert-base-uncased', help='BERT tokenizer')
+    parser.add_argument('--ck_bert', default='/path/datasets/bert-base-uncased', help='pre-trained BERT weights')
+    parser.add_argument('--refer_data_root', default='/path/datasets', help='REFER dataset root directory')
     parser.add_argument('--dataset', default='refcoco', help='refcoco, refcoco+, or refcocog')
     parser.add_argument('--splitBy', default='unc', help='change to umd or google when the dataset is G-Ref (RefCOCOg)')
 
@@ -76,8 +61,7 @@ def get_parser():
     parser.add_argument('--num_augs', default=3, type=int, help='for strong Aug')
     parser.add_argument('--w_CE', default=5.0, type=float)
     parser.add_argument('--w_con', default=2.0, type=float)
-    #parser.add_argument('--load_path', default="/public2/home/fuchenglong/0000000fcl-semi-exp1/fcl_semiLAVT/UniMatch-main/exp/refcoco/10%/1019_5299/best_checkpoint.pth", type=str)
-    
+
     # EDA_Augment
     parser.add_argument("--num_aug", default=9, type=int, help="number of augmented sentences per original sentence")
     parser.add_argument("--alpha_sr", default=0.1, type=float,help="percent of words in each sentence to be replaced by synonyms")
@@ -87,16 +71,11 @@ def get_parser():
 
     # quality_con
     parser.add_argument('--unsupervised_threshold', default=0.7, type=float)
-    parser.add_argument('--textAug', default=False, type=bool, help='textAug')
-    parser.add_argument('--textFilter', default=False, type=bool, help='textFilter')
-    #parser.add_argument('--adaptImgAug', default=False, type=bool, help='adaptImgAug')
-    parser.add_argument('--flag_augs_mixup_by_hard', default=False, type=bool, help='mix_up')    # 2
-    parser.add_argument('--use_q_score', default=False, type=bool, help='use_q_score')
-    parser.add_argument('--flag_conf_weighted_loss', default=False, type=bool, help='weighted_loss') # 1
+
 
     
     # data
-    parser.add_argument('--labeled_data', default='/media/exp/fcl/00000semi_RES_0925/anns/refcoco/refcoco_0-1%_image.json', help='path to labeled data')
-    parser.add_argument('--unlabeled_data', default='/media/exp/fcl/00000semiRES0908/res_simi_bert_fcl/anns/refcoco/refcoco_90%_image.json', help='path to unlabeled data')
+    parser.add_argument('--labeled_data', default='path/anns/refcoco/refcoco_0-1%_image.json', help='path to labeled data')
+    parser.add_argument('--unlabeled_data', default='path/anns/refcoco/refcoco_90%_image.json', help='path to unlabeled data')
 
     return parser

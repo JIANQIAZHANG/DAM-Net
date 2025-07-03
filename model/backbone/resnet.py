@@ -149,7 +149,7 @@ class ResNet(nn.Module):
 def _resnet(arch, block, layers, pretrained, **kwargs):
     model = ResNet(block, layers, **kwargs)
     if pretrained:
-        pretrained_path = "/media/exp/fcl/00000semi_RES_0913/UniMatch-main/pretrained/%s.pth" % arch
+        pretrained_path = "path/pretrained/%s.pth" % arch
         state_dict = torch.load(pretrained_path)
         model.load_state_dict(state_dict, strict=False)
     return model

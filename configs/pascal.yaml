@@ -2,7 +2,7 @@
 dataset: pascal
 nclass: 21
 crop_size: 321
-data_root: /media/exp/fcl/datasets/UniMatch/Pascal
+data_root: Your/Pascal/Path
 
 # arguments for training
 epochs: 80
