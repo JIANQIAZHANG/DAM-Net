@@ -26,10 +26,7 @@ pip install -r requirements.txt
 
 COCO: [train2017](http://images.cocodataset.org/zips/train2017.zip) | [val2017](http://images.cocodataset.org/zips/val2017.zip) | [masks](https://drive.google.com/file/d/166xLerzEEIbU7Mt1UGut-3-VN41FMUb1/view?usp=sharing)
 
-pretrained weights and dataset partitioning, etc：
-
-[Link](https://pan.baidu.com/s/10uwKKG5Ie8Dq2IvDI9HJcw)
-Extraction code: snpi
+pretrained weights and dataset partitioning, etc：[Link](https://pan.baidu.com/share/init?surl=zgFTtCXC3MOE0nxHss6YVw&pwd=h8rt)
 
 Please modify your dataset path in configuration files.
 
